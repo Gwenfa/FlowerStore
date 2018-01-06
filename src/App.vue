@@ -19,7 +19,7 @@
     <img slot="icon"  v-show="active===3" src="//img02.hua.com/m/icon/cart_icon_click_new.png">
     <router-link to="/shoppingcart">购物车</router-link>
   </mt-tab-item>
-  <mt-tab-item id="mine" @click.native="showActive(4)">
+  <mt-tab-item id="mine" class="active_mine" @click.native="showActive(4)">
     <img slot="icon" v-show="active!=4" src="//img02.hua.com/m/icon/my_icon_new.png">
     <img slot="icon"  v-show="active===4" src="//img02.hua.com/m/icon/my_icon_click_new.png">
     <router-link to="/mine">我的</router-link>
@@ -59,6 +59,11 @@ export default {
         active:1
     }
   },
+  mounted(){
+    $(function(){
+      $(".mint-tabbar").show();
+    })
+  },
   methods:{
     change:function(){
       // alert("hello")
@@ -67,21 +72,31 @@ export default {
     showActive:function(index){
       $(".active_classify").removeClass('is-selected');
       $(".active_classify img").attr("src","//img02.hua.com/m/icon/classify_icon_new.png");
+
+      $(".active_mine").removeClass('is-selected');
+      $(".active_mine img").attr("src","//img02.hua.com/m/icon/my_icon_new.png");
       this.active=index;
       if(index===1){
         this.$router.push('/home');
         $(".active_home img").attr("src","//img02.hua.com/m/icon/home_icon_click_new.png");
       }
       if(index===2){
+        $(".active_home").removeClass('is-selected');
         this.$router.push('/classify');
         $(".active_home img").attr("src","//img02.hua.com/m/icon/home_icon_new.png");
         $(".active_classify").addClass('is-selected');
         $(".active_classify img").attr("src","//img02.hua.com/m/icon/classify_icon_click_new.png");
       }
-      if(index===3)
+      if(index===3){
+        $(".active_home").removeClass('is-selected');
         this.$router.push('/shoppingcart');
-      if(index===4)
+      }
+      if(index===4){
+        $(".active_home").removeClass('is-selected');
         this.$router.push('/mine');
+        $(".active_mine").addClass('is-selected');
+        $(".active_mine img").attr("src","//img02.hua.com/m/icon/my_icon_click_new.png");
+      }
     }
   }
 }
@@ -96,6 +111,9 @@ export default {
   color: #2c3e50;
   /*margin-top: 60px;*/
 }
+.mint-tabbar.is-fixed {
+    z-index: 999;
+  }
 #app .tab{
   display: flex;
   justify-content: space-between;

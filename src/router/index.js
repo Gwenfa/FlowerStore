@@ -13,6 +13,7 @@ import mine from './../components/Mine'
 // import Search from './../components/search'
 // import Order from './../components/order'
  // import Test from './../components/test'
+ import product from './../components/product'
 
 export default new Router({
   routes: [
@@ -45,6 +46,11 @@ export default new Router({
       path: '/mine',
       name: 'mine',
       component:mine
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component:product
     }
 
   ]

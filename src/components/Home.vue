@@ -11,6 +11,10 @@
             <div class="swiper-pagination"></div>
         </div> 
     </div>
+    <div class="fadesearch">
+         <mt-search v-model="value" cancel-text="" placeholder="搜索" @click.native="goSearch()"></mt-search>
+         <div class="login"> <a href="/Passport/Login/">登录</a></div>
+    </div>
     <div class="search">
          <mt-search v-model="value" cancel-text="" placeholder="搜索" @click.native="goSearch()"></mt-search>
 		 <div class="login"> <a href="/Passport/Login/">登录</a></div>
@@ -69,7 +73,7 @@
 		<ul>
 			<li v-for="flower in flowerList">
 				<div class="pro_box">
-					<router-link to="">
+					<router-link to="/product">
 						<img :src="flower.flowerimg" alt="鲜花/一心一意">
 						<div class="pro_text">
 							<p class="pro_name">{{flower.pro_name}}</p>
@@ -188,6 +192,15 @@ export default {
   	var vm=this;
     vm.getaData();
     vm.box_Click();
+    var sc=$(document);//得到document文档对象。
+        $(window).scroll(function () {
+            if(sc.scrollTop()>0){
+                $(".fadesearch").fadeIn(); 
+            }
+            else{
+                $(".fadesearch").fadeOut();
+            }
+        })
 
     function goTopEx() {
         var obj = document.getElementById("goTopBtn");
@@ -293,6 +306,18 @@ export default {
 .home .swiper-container {
     height: 8.5rem;
 }
+.home .fadesearch {
+    width: 100%;
+    height: 42px;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    background: white;
+    display: none;
+}
+.home .fadesearch .mint-search input,.home .fadesearch .mint-search .mint-searchbar .mint-searchbar-inner{
+    background: #f5f5f5;
+}
 .home .search{
     width: 100%;
     height: 42px;
@@ -300,6 +325,7 @@ export default {
     top: 0;
     background: white;
 }
+
 .home .mint-search {
 	position: absolute;
     top: 7px;
